@@ -52,7 +52,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_09_130440) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
-  create_table "announcements", force: :cascade do |t|
+  create_table "announcements", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.datetime "published_at"
     t.string "announcement_type"
     t.string "name"
@@ -61,7 +61,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_09_130440) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "friendly_id_slugs", force: :cascade do |t|
+  create_table "friendly_id_slugs", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "slug", null: false
     t.integer "sluggable_id", null: false
     t.string "sluggable_type", limit: 50
@@ -84,8 +84,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_09_130440) do
     t.index ["recipient_type", "recipient_id"], name: "index_notifications_on_recipient"
   end
 
-  create_table "services", force: :cascade do |t|
-    t.bigint "user_id", null: false
+  create_table "services", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "user_id", null: false
     t.string "provider"
     t.string "uid"
     t.string "access_token"
@@ -98,7 +98,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_09_130440) do
     t.index ["user_id"], name: "index_services_on_user_id"
   end
 
-  create_table "users", force: :cascade do |t|
+  create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
