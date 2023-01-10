@@ -34,6 +34,7 @@ class User < ApplicationRecord
 
   has_many :notifications, as: :recipient, dependent: :destroy
   has_many :services
+  has_many :gifs, dependent: :destroy, class_name: 'Gif', foreign_key: 'user_id'
   validates_uniqueness_of :username 
   
 # Roles, add other roles as required
